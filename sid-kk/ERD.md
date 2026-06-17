@@ -1,0 +1,172 @@
+# ERD - Entity Relationship Diagram SID-KK
+
+## Authentication & Authorization
+
+```
+┌─────────────┐       ┌──────────────┐       ┌──────────────┐
+│    User     │       │     Role     │       │  Permission  │
+├─────────────┤       ├──────────────┤       ├──────────────┤
+│ id (PK)     │──┐    │ id (PK)      │    ┌──│ id (PK)      │
+│ email       │  │    │ name         │    │  │ name         │
+│ username    │  └───▶│ displayName  │◀───┘  │ module       │
+│ password    │       │ description  │       │ description  │
+│ fullName    │       └──────────────┘       └──────────────┘
+│ phone       │              ▲
+│ roleId (FK) │──────────────┘
+│ rtId (FK)   │
+│ kolektorPbb │
+└─────────────┘
+```
+
+## Wilayah Administratif
+
+```
+┌─────────────┐       ┌──────────────┐       ┌──────────────┐
+│    Dusun    │       │      RW      │       │      RT      │
+├─────────────┤       ├──────────────┤       ├──────────────┤
+│ id (PK)     │──┐    │ id (PK)      │──┐    │ id (PK)      │
+│ name        │  │    │ name         │  │    │ name         │
+│ code        │  └───▶│ dusunId(FK)  │  └───▶│ rwId (FK)    │
+│ headName    │       │ code         │       │ code         │
+│ headPhone   │       └──────────────┘       └──────────────┘
+└─────────────┘
+```
+
+## Kependudukan
+
+```
+┌─────────────┐       ┌──────────────┐       ┌──────────────┐
+│  Keluarga   │       │   Penduduk   │       │ Wajib Pajak  │
+├─────────────┤       ├──────────────┤       ├──────────────┤
+│ id (PK)     │──┐    │ id (PK)      │──┐    │ id (PK)      │
+│ noKk        │  │    │ nik          │  │    │ nop          │
+│ address     │  └───▶│ familyId(FK) │  └───▶│ pendudukId   │
+│ rtId (FK)   │       │ fullName     │       │ rtId (FK)    │
+│ phone       │       │ birthDate    │       │ objectAddress│
+└─────────────┘       │ gender       │       │ njop         │
+                      │ occupation   │       │ pbbAmount    │
+                      └──────────────┘       └──────────────┘
+```
+
+## Modul PBB
+
+```
+┌─────────────┐       ┌──────────────┐       ┌──────────────┐
+│     Pbb     │       │  PbbPayment  │       │PbbVerification│
+├─────────────┤       ├──────────────┤       ├──────────────┤
+│ id (PK)     │──┐    │ id (PK)      │──┐    │ id (PK)      │
+│ year        │  │    │ pbbId (FK)   │  │    │ paymentId    │
+│ wajibPajakId│  └───▶│ amount       │  └───▶│ verifiedBy   │
+│ tagihan     │       │ proofImage   │       │ action       │
+│ status      │       │ status       │       │ notes        │
+│ spptNo      │       │ rejectionRsn │       └──────────────┘
+└─────────────┘       └──────────────┘
+```
+
+## Modul Surat
+
+```
+┌─────────────┐       ┌──────────────┐
+│    Surat    │       │ SuratRequest │
+├─────────────┤       ├──────────────┤
+│ id (PK)     │──┐    │ id (PK)      │
+│ code        │  │    │ requestNumber│
+│ name        │  └───▶│ suratId(FK)  │
+│ type        │       │ pemohonName  │
+│ template    │       │ purpose      │
+│ requirements│       │ status       │
+└─────────────┘       │ pdfUrl       │
+                      │ qrCode       │
+                      └──────────────┘
+```
+
+## Modul Bantuan Sosial
+
+```
+┌─────────────┐       ┌──────────────┐
+│BantuanSosial│       │BantuanPenerima│
+├─────────────┤       ├──────────────┤
+│ id (PK)     │──┐    │ id (PK)      │
+│ name        │  │    │ bantuanId    │
+│ type        │  └───▶│ nik          │
+│ year        │       │ name         │
+│ quota       │       │ score        │
+│ budget      │       │ status       │
+└─────────────┘       └──────────────┘
+```
+
+## Modul Publik
+
+```
+┌─────────────┐       ┌──────────────┐
+│    Berita   │       │   Pengaduan  │
+├─────────────┤       ├──────────────┤
+│ id (PK)     │       │ id (PK)      │
+│ title       │       │ reportNumber │
+│ slug        │       │ pelaporName  │
+│ content     │       │ category     │
+│ category    │       │ title        │
+│ isPublished │       │ status       │
+│ authorId    │       │ response     │
+└─────────────┘       └──────────────┘
+```
+
+## Sistem & Audit
+
+```
+┌─────────────┐       ┌──────────────┐       ┌──────────────┐
+│  AuditLog   │       │ Notification │       │    Session   │
+├─────────────┤       ├──────────────┤       ├──────────────┤
+│ id (PK)     │       │ id (PK)      │       │ id (PK)      │
+│ userId (FK) │       │ userId (FK)  │       │ userId (FK)  │
+│ action      │       │ title        │       │ token        │
+│ entity      │       │ message      │       │ refreshToken │
+│ oldData     │       │ isRead       │       │ expiresAt    │
+│ newData     │       └──────────────┘       └──────────────┘
+└─────────────┘
+```
+
+## Hierarki Wilayah
+
+```
+Desa Kasomalang Kulon
+├── Dusun A
+│   ├── RW 01
+│   │   ├── RT 01
+│   │   └── RT 02
+│   └── RW 02
+│       ├── RT 03
+│       └── RT 04
+├── Dusun B
+│   ├── RW 03
+│   │   ├── RT 05
+│   │   └── RT 06
+│   └── ...
+└── Dusun C
+    └── ...
+```
+
+## Status Flow
+
+### PBB Payment
+```
+BELUM_BAYAR → Upload Bukti → PENDING → Verifikasi Admin
+                                              ↓
+                            ┌─────────────────┴─────────────────┐
+                            ↓                                   ↓
+                       APPROVED                             REJECTED
+                            ↓                                   ↓
+                        LUNAS                          BELUM_BAYAR (lagi)
+```
+
+### Surat Request
+```
+DIAJUKAN → DIPROSES → DISETUJUI → SELESAI (PDF + QR)
+                     └→ DITOLAK (dengan alasan)
+```
+
+### Pengaduan
+```
+DITERIMA → DIPROSES → SELESAI
+           └→ DITOLAK (dengan alasan)
+```
