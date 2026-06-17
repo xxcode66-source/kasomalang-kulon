@@ -1,49 +1,18 @@
---- .gitignore (原始)
-node_modules/
-.next/
-.env
-.env.local
-.env.*.local
-dist/
-build/
-.DS_Store
-*.log
-npm-debug.log*
-yarn-debug.log*
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-.cache/
-.vercel/
-
-+++ .gitignore (修改后)
 ```
 # Dependencies
 node_modules/
 
-# Build artifacts
+# Build outputs
 dist/
 build/
 .next/
-out/
 
 # Environment variables
-.env.local
 .env
+.env.local
+*.env.*
 
-# Editor/IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-*.tmp
-
-# Logs
-*.log
-
-# Python specific
+# Python
 __pycache__/
 *.pyc
 *.pyo
@@ -54,6 +23,25 @@ venv/
 .venv/
 pip-log.txt
 pip-delete-this-directory.txt
-*.so
-.Python
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+*.pot
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
+
+# Next.js
+.next/
+out/
+
+# TypeScript
+*.tsbuildinfo
 ```
