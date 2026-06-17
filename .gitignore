@@ -1,3 +1,4 @@
+--- .gitignore (原始)
 node_modules/
 .next/
 .env
@@ -16,3 +17,43 @@ yarn-debug.log*
 *~
 .cache/
 .vercel/
+
++++ .gitignore (修改后)
+```
+# Dependencies
+node_modules/
+
+# Build artifacts
+dist/
+build/
+.next/
+out/
+
+# Environment variables
+.env.local
+.env
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# Logs
+*.log
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+*.so
+.Python
+```
