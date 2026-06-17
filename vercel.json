@@ -3,6 +3,5 @@
   "builds": [
     { "src": "sid-kk/apps/web/package.json", "use": "@vercel/next" }
   ],
-  "outputDirectory": "sid-kk/apps/web/.next",
   "rewrites": []
 }
